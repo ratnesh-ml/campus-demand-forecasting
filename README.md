@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ratnesh-ml/campus-demand-forecasting/actions/workflows/test.yml/badge.svg)](https://github.com/ratnesh-ml/campus-demand-forecasting/actions/workflows/test.yml)
 
-> **Portfolio demo:** [Open the Ratnesh ML Lab showcase](https://ratnesh-ml-brwn1i9o5-ratnezhsingh-6317.vercel.app)
+> **Portfolio demo:** [Open the Ratnesh ML Lab showcase](https://ratnesh-ml-lab.vercel.app)
 
 A small tabular machine-learning project about a problem I can imagine a campus actually facing: estimating daily resource demand when attendance, weather, weekdays, and exam periods move together.
 
