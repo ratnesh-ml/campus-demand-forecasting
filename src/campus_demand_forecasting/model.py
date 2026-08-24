@@ -71,5 +71,16 @@ def train_model(frame: pd.DataFrame, seed: int = 42) -> ForecastResult:
     return ForecastResult(model, metrics, test_frame)
 
 
+def time_ordered_split(frame: pd.DataFrame, test_size: float = .2) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Split a date-indexed frame chronologically for leakage-aware evaluation."""
+    if not 0 < test_size < 1:
+        raise ValueError("test_size must be between 0 and 1")
+    if len(frame) < 2:
+        raise ValueError("frame must contain at least two rows")
+    split = min(max(1, int(round(len(frame) * (1 - test_size)))), len(frame) - 1)
+    ordered = frame.sort_values("date").reset_index(drop=True)
+    return ordered.iloc[:split].copy(), ordered.iloc[split:].copy()
+
+
 def evaluate(seed: int = 42) -> dict[str, float]:
     return train_model(generate_dataset(seed=seed), seed=seed).metrics
