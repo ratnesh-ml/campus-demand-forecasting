@@ -1,0 +1,24 @@
+name: Forecast evaluation bug
+description: Report a reproducible baseline, chronological split, metric, data-contract, or documentation issue.
+title: "bug: "
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed evaluation behavior
+      description: Include the command, safe sample shape, and result you observed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Scope check
+      options:
+        - label: I did not include private campus records or make a real resource-allocation claim.
+          required: true
