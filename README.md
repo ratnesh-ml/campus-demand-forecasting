@@ -2,21 +2,19 @@
 
 [![CI](https://github.com/ratnesh-ml/campus-demand-forecasting/actions/workflows/test.yml/badge.svg)](https://github.com/ratnesh-ml/campus-demand-forecasting/actions/workflows/test.yml)
 
-> **Portfolio demo:** [Open the Ratnesh ML Lab showcase](https://ratnesh-ml-lab.vercel.app)
+I built this tabular ML baseline around a familiar planning question: if attendance, weekdays, weather, and exam periods move together, how could a campus team begin estimating daily resource demand? The point is not to claim that a synthetic dataset represents a real campus. The point is to practise the modelling habits I would want before making any real planning claim.
 
-A small tabular machine-learning project about a problem I can imagine a campus actually facing: estimating daily resource demand when attendance, weather, weekdays, and exam periods move together.
+I create deterministic daily observations, define a data contract, compare a random-forest pipeline against a naive reference, and report error in units a planner can understand.
 
-The point is not to claim that a synthetic dataset represents a real campus. The point is to show a complete modelling habit: define a data contract, make a repeatable baseline, compare against a naive reference, and report error in units a planner can understand.
+## At a glance
 
-## What it demonstrates
-
-| Layer | Choice |
+| Layer | What I implemented |
 | --- | --- |
-| Data | Deterministic synthetic daily campus observations |
-| Features | Calendar, exam period, rain, temperature, attendance |
-| Model | Random forest regression in a scikit-learn pipeline |
-| Evaluation | MAE and RMSE with a held-out split plus naive baseline |
-| Reproducibility | Fixed seeds, `pyproject.toml`, tests, GitHub Actions |
+| Data | Deterministic synthetic daily campus observations. |
+| Features | Calendar variables, exam period, rain, temperature, and attendance. |
+| Model | Random forest regression in a scikit-learn pipeline. |
+| Evaluation | MAE and RMSE, a held-out split, and a naive baseline. |
+| Reproducibility | Fixed seeds, `pyproject.toml`, tests, and GitHub Actions. |
 
 ## Run it locally
 
@@ -28,18 +26,16 @@ python -m campus_demand_forecasting
 pytest -q
 ```
 
-## Recent depth improvements
+## The technical habit I was practising
 
-The project includes a validated `time_ordered_split` helper for leakage-aware chronological evaluation in addition to the original reproducible baseline. This keeps the random split demo explicit while giving the next experiment a safer forecasting protocol. GitHub Actions runs the regression suite on pushes and pull requests.
+I wanted to keep the data generation, training, and evaluation separate so the baseline was easier to inspect and change. The project includes a validated `time_ordered_split` helper for a leakage-aware chronological evaluation experiment. I keep that distinct from the default random holdout rather than implying the demo is already a production forecast.
 
-## Why this is useful in a portfolio
+## Limits and next experiments
 
-It is deliberately more than a notebook. The code separates data generation, training, and evaluation, while the tests protect the public behaviour. A next iteration would use real, permission-cleared campus data, prediction intervals, and a small planning dashboard.
+The data is simulated and must not be used for operational decisions. The default baseline still uses a random holdout; the chronological helper is a safer starting point for the next experiment, not a substitute for real time-aware validation.
 
-## Limitations
+If I continue this project, I would use permission-cleared campus data, add prediction intervals, measure error across meaningful segments, and build a small planning interface around the model.
 
-The data is simulated and should not be used for operational decisions. The default baseline still uses a random holdout; the new chronological helper is available for a production-shaped experiment but does not itself create a real forecast or uncertainty interval.
+## Verification and license
 
-## License
-
-MIT. See [LICENSE](LICENSE).
+Run `pytest -q` for local checks. GitHub Actions runs the regression suite on pushes and pull requests. MIT licensed; see [LICENSE](LICENSE).
